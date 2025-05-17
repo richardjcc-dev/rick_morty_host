@@ -1,18 +1,27 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import federation from '@originjs/vite-plugin-federation'
 // import { resolve } from 'path'
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react()],
-  // root: resolve(__dirname, 'src'),
+  plugins: [
+    react(),
+    federation({
+      name: 'rick_morty_host',
+      remotes: {
+        rick_morty_remote: 'http://localhost:4173/assets/remoteEntry.js',
+      },
+      shared: ['react', 'react-dom'],
+    }),
+  ],
   build: {
-    outDir: '../dist',
+    modulePreload: false,
+    target: 'esnext',
+    minify: false,
+    cssCodeSplit: false,
   },
-  server: {
-    port: 8080,
-  },
-  // Optional: Silence Sass deprecation warnings. See note below.
+  // Silence Sass deprecation warnings.
   css: {
     preprocessorOptions: {
       scss: {
