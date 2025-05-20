@@ -24,7 +24,14 @@
   opacity: 0.9;
 }
 
+.rick-morty-logo {
+  width: 270px;
+  height: 96px;
+  margin-bottom: 1rem;
+}
+
 .header-content {
+  background-color: rgba(0, 0, 0, 0.5);
   position: absolute;
   top: 0;
   left: 0;
@@ -34,16 +41,17 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.5);
+  gap: 2;
   z-index: 1;
 }
 
 .content {
+  width: 1200px;
+  margin-top: 1rem;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   flex-wrap: wrap;
   gap: 2;
-  width: 1040px;
   flex-grow: 1;
 }
 

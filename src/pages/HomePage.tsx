@@ -1,24 +1,24 @@
+import CharacterSearcher from 'rick_morty_remote/CharacterSearcher'
+import CharacterCard from 'rick_morty_remote/CharacterCard'
+
 function HomePage() {
   return (
     <section className="main-page-container">
-      <header className="header">
+      <header className="header py-2">
         <img src="/hero.png" alt="rick-morty-logo" className="background-img" />
         <div className="header-content">
-          <input
-            type="text"
-            placeholder="Buscar por nombre de personaje"
-            className="w-50"
+          <img
+            src="/logo/logo.svg"
+            alt="rick-morty-logo"
+            className="rick-morty-logo"
           />
+          <CharacterSearcher />
         </div>
       </header>
 
       <section className="content">
-        <h1>Body</h1>
-        <h1>Body</h1>
-        <h1>Body</h1>
-        <h1>Body</h1>
-        <h1>Body</h1>
-        <h1>Body</h1>
+        <CharacterCard />
+        <CharacterCard />
       </section>
       <footer className="footer">
         <p>TM & © 2024 The Cartoon Network, Inc. All Rights Reserved.</p>
