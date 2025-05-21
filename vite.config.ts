@@ -12,7 +12,7 @@ export default defineConfig({
       remotes: {
         rick_morty_remote: 'http://localhost:4173/assets/remoteEntry.js',
       },
-      shared: ['react', 'react-dom'],
+      shared: ['react', 'react-dom', 'zustand'],
     }),
   ],
   build: {

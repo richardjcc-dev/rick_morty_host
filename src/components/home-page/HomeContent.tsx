@@ -6,7 +6,6 @@ import CharactersFilters from 'rick_morty_remote/CharactersFilters'
 function HomeContent() {
   const [show, setShow] = useState(false)
   const [activeTab, setActiveTab] = useState('all')
-  // const [selectedCharacter, setSelectedCharacter] = useState({})
 
   const handleCloseDetails = () => setShow(false)
   const handleShowDetails = () => setShow(true)
