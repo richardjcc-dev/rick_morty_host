@@ -1,10 +1,18 @@
 // Import all of Bootstrap’s CSS
 @import 'bootstrap/scss/bootstrap';
 
-@import 'bootstrap/dist/css/bootstrap.min.css';
-
 @import '../app/App.scss';
 
 @import './pages/welcomepage.scss';
 
 @import './pages/homepage.scss';
+
+@import './pagination-styles.scss';
+
+@import './remote-components/character-card.scss';
+
+@import './remote-components/character-details.scss';
+
+@import './remote-components/character-searcher.scss';
+
+@import './remote-components/characters-filter.scss';

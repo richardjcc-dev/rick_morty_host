@@ -1,23 +1,99 @@
-import { useState } from 'react'
+import * as React from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import CharacterCard from 'rick_morty_remote/CharacterCard'
 import CharacterDetails from 'rick_morty_remote/CharacterDetails'
 import CharactersFilters from 'rick_morty_remote/CharactersFilters'
+import useCharacterStore from '../../stores/characterStore'
+import type { Character } from 'rick_morty_remote/Character'
+import { Spinner, Alert } from 'react-bootstrap'
+import ReactPaginate from 'react-paginate'
 
-function HomeContent() {
+const HomeContent: React.FC = () => {
   const [show, setShow] = useState(false)
   const [activeTab, setActiveTab] = useState('all')
+  const {
+    characters,
+    loading,
+    error,
+    fetchCharacters,
+    currentPage,
+    totalPages,
+    nameFilter,
+    speciesFilter,
+    genderFilter,
+    statusFilter,
+  } = useCharacterStore()
+  const [selectedCharacter, setSelectedCharacter] = useState<Character | null>(
+    null,
+  )
 
-  const handleCloseDetails = () => setShow(false)
-  const handleShowDetails = () => setShow(true)
+  const handleCloseDetails = () => {
+    setShow(false)
+    setSelectedCharacter(null)
+  }
+  const handleShowDetails = (characterData: Character) => {
+    setSelectedCharacter(characterData)
+    setShow(true)
+  }
 
-  const character = {
-    name: 'Rick Sanchez',
-    species: 'Human',
-    gender: 'Male',
-    status: 'Alive',
-    location: 'Citadel of Ricks',
-    origin: 'Pilot',
-    image: 'https://rickandmortyapi.com/api/character/avatar/1.jpeg',
+  const handlePageClick = useCallback(
+    (data: { selected: number }) => {
+      const newPage = data.selected + 1
+      fetchCharacters(newPage)
+      window.scrollTo(0, 0)
+    },
+    [fetchCharacters],
+  )
+
+  useEffect(() => {
+    fetchCharacters(currentPage)
+  }, [
+    fetchCharacters,
+    currentPage,
+    nameFilter,
+    speciesFilter,
+    genderFilter,
+    statusFilter,
+  ])
+
+  if (loading) {
+    return (
+      <div
+        className="d-flex justify-content-center align-items-center"
+        style={{ minHeight: '80vh' }}
+      >
+        <Spinner animation="border" role="status">
+          <span className="visually-hidden">Cargando...</span>
+        </Spinner>
+      </div>
+    )
+  }
+
+  if (error && characters.length === 0) {
+    return (
+      <section className="no-characters-placeholder-container">
+        <div className="no-characters-placeholder-content">
+          <div>
+            <h3 className="fw-bold text-center">Oh no!</h3>
+            <p className="fw-bold">¡Pareces perdido en tu viaje!</p>
+          </div>
+          <button
+            onClick={() => useCharacterStore.getState().clearAllFilters()}
+            className="btn btn-light"
+          >
+            Limpiar filtros
+          </button>
+        </div>
+      </section>
+    )
+  }
+
+  if (error) {
+    return (
+      <Alert variant="danger" className="m-4">
+        Error al cargar los personajes: {error}
+      </Alert>
+    )
   }
 
   return (
@@ -43,36 +119,33 @@ function HomeContent() {
       </div>
       {activeTab === 'all' && (
         <div className="content mt-0">
-          <div className="mb-3">
-            <CharacterCard onClick={handleShowDetails} character={character} />
+          {characters.map((character) => (
+            <div className="mb-3" key={character.id}>
+              <CharacterCard
+                onClick={handleShowDetails}
+                character={character}
+              />
+            </div>
+          ))}
+          {selectedCharacter && (
+            <CharacterDetails
+              character={selectedCharacter}
+              onHide={handleCloseDetails}
+              show={show}
+            />
+          )}
+          <div className="w-100 d-flex justify-content-center">
+            <ReactPaginate
+              breakLabel="..."
+              previousLabel="<"
+              nextLabel=">"
+              pageCount={totalPages}
+              onPageChange={handlePageClick}
+              renderOnZeroPageCount={null}
+              className="react-paginate"
+              forcePage={currentPage - 1}
+            />
           </div>
-          <div className="mb-3">
-            <CharacterCard onClick={handleShowDetails} character={character} />
-          </div>
-          <div className="mb-3">
-            <CharacterCard onClick={handleShowDetails} character={character} />
-          </div>
-          <div className="mb-3">
-            <CharacterCard onClick={handleShowDetails} character={character} />
-          </div>
-          <div className="mb-3">
-            <CharacterCard onClick={handleShowDetails} character={character} />
-          </div>
-          <div className="mb-3">
-            <CharacterCard onClick={handleShowDetails} character={character} />
-          </div>
-          <div className="mb-3">
-            <CharacterCard onClick={handleShowDetails} character={character} />
-          </div>
-          <div className="mb-3">
-            <CharacterCard onClick={handleShowDetails} character={character} />
-          </div>
-
-          <CharacterDetails
-            character={character}
-            onHide={handleCloseDetails}
-            show={show}
-          />
         </div>
       )}
       {activeTab === 'favorites' && <div>Favoritos</div>}

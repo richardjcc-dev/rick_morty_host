@@ -1,4 +1,6 @@
+// import { useRef } from 'react'
 import CharacterSearcher from 'rick_morty_remote/CharacterSearcher'
+// import useCharacterStore from '../../stores/characterStore';
 
 function HomeHeader() {
   return (

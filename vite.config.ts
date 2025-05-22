@@ -12,7 +12,19 @@ export default defineConfig({
       remotes: {
         rick_morty_remote: 'http://localhost:4173/assets/remoteEntry.js',
       },
-      shared: ['react', 'react-dom', 'zustand'],
+      filename: 'hostEntry.js',
+      exposes: {
+        './characterStore': './src/stores/characterStore',
+      },
+      shared: [
+        'react',
+        'react-dom',
+        'zustand',
+        'bootstrap',
+        'axios',
+        'react-bootstrap',
+        'react-paginate',
+      ],
     }),
   ],
   build: {
@@ -21,7 +33,6 @@ export default defineConfig({
     minify: false,
     cssCodeSplit: false,
   },
-  // Silence Sass deprecation warnings.
   css: {
     preprocessorOptions: {
       scss: {
