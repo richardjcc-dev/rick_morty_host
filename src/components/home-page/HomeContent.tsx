@@ -71,19 +71,40 @@ const HomeContent: React.FC = () => {
 
   if (error && characters.length === 0) {
     return (
-      <section className="no-characters-placeholder-container">
-        <div className="no-characters-placeholder-content">
-          <div>
-            <h3 className="fw-bold text-center">Oh no!</h3>
-            <p className="fw-bold">¡Pareces perdido en tu viaje!</p>
+      <section className="content">
+        <div className="d-flex justify-content-between align-items-center w-100 mt-1 mb-5">
+          <div className="home-breadcrumb px-3">
+            <button
+              className={`btn ${activeTab === 'all' ? 'btn-success' : ''}`}
+              onClick={() => setActiveTab('all')}
+            >
+              All
+            </button>
+            <button
+              className={`btn breadcrumb-btn ${activeTab === 'favorites' ? 'btn-success' : ''}`}
+              onClick={() => setActiveTab('favorites')}
+            >
+              Favorites
+            </button>
           </div>
-          <button
-            onClick={() => useCharacterStore.getState().clearAllFilters()}
-            className="btn btn-light"
-          >
-            Limpiar filtros
-          </button>
+          <div>
+            <CharactersFilters />
+          </div>
         </div>
+        <section className="no-characters-placeholder-container">
+          <div className="no-characters-placeholder-content">
+            <div>
+              <h3 className="fw-bold text-center">Oh no!</h3>
+              <p className="fw-bold">¡Pareces perdido en tu viaje!</p>
+            </div>
+            <button
+              onClick={() => useCharacterStore.getState().clearAllFilters()}
+              className="btn btn-light"
+            >
+              Limpiar filtros
+            </button>
+          </div>
+        </section>
       </section>
     )
   }
