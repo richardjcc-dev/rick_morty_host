@@ -50,9 +50,13 @@ export default tseslint.config(
         ...globals.node,
       },
     },
+    env: {
+      jest: true,
+    },
     plugins: {
       'jest-dom': jestPlugin,
       'testing-library': testingLibrary,
+      jest: jest,
     },
     extends: [jestPlugin.configs.recommended, testingLibrary.configs.react],
     rules: {

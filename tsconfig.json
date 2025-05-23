@@ -12,5 +12,6 @@
     "strict": true,
     "types": ["jest", "node"]
   },
-  "include": ["src"]
+  "include": ["src"],
+  "exclude": ["src/__mocks__", "node_modules", "**/*.spec.ts", "**/*.test.ts"]
 }

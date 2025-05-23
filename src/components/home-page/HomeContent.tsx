@@ -212,7 +212,7 @@ const HomeContent: React.FC = () => {
         </div>
       )}
       {activeTab === 'favorites' && (
-        <div>
+        <div className="w-100">
           {favorites.length === 0 ? (
             <div className="w-100 d-flex justify-content-center align-content-center">
               Aún no tienes personajes favoritos. ¡Añade algunos desde la página
