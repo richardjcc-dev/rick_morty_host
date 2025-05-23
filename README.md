@@ -4,7 +4,7 @@ Este repositorio contiene la aplicación principal o "Host" para el proyecto de 
 
 ---
 
-## 📦 Instalación y Ejecución
+## Instalación y Ejecución
 
 Para instalar las dependencias y ejecutar el microfrontend, se deben seguir los siguientes pasos:
 
@@ -24,7 +24,7 @@ Para instalar las dependencias y ejecutar el microfrontend, se deben seguir los 
 
 ---
 
-## 🏗️ Arquitectura del Host
+## Arquitectura del Host
 
 El `rick_morty_host` es la aplicación principal en esta arquitectura de microfrontends. Sus responsabilidades clave incluyen:
 
@@ -44,7 +44,7 @@ Los componentes principales que componen la `HomePage` son:
 
 ---
 
-## 🛠️ Dependencias Usadas
+## Dependencias Usadas
 
 Este proyecto utiliza las siguientes dependencias clave:
 
