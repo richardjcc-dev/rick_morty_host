@@ -54,10 +54,21 @@
 }
 
 .content {
-  width: 1200px;
+  width: 100%;
   margin-top: 1rem;
   display: flex;
-  justify-content: space-between;
+  // justify-content: space-between;
+  align-content: start;
+  flex-wrap: wrap;
+  flex-grow: 1;
+}
+
+.characters-wrapper {
+  width: 75%;
+  height: 100%;
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
   align-content: start;
   flex-wrap: wrap;
   flex-grow: 1;

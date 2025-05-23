@@ -4,7 +4,7 @@ if (typeof window.HTMLElement.prototype.scrollIntoView === 'undefined') {
   window.HTMLElement.prototype.scrollIntoView = jest.fn()
 }
 
-import { server } from './__mocks__/server.ts'
+import { server } from './__mocks__/server'
 
 beforeAll(() => server.listen())
 

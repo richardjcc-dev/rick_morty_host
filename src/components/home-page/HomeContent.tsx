@@ -97,7 +97,7 @@ const HomeContent: React.FC = () => {
           <h5 className="fw-bold">{count}</h5>
           <span className="text-secondary">Personajes</span>
         </div>
-        <section className="no-characters-placeholder-container">
+        <section className="characters-wrapper">
           <div className="no-characters-placeholder-content">
             <div>
               <h3 className="fw-bold text-center">Oh no!</h3>
@@ -118,7 +118,7 @@ const HomeContent: React.FC = () => {
   if (error) {
     return (
       <section className="content">
-        <div className="d-flex justify-content-between align-items-center w-100 mt-1 mb-3">
+        <div className="d-flex justify-content-between align-items-center w-100 mt-1 mb-3 mx-4">
           <div className="home-breadcrumb px-3">
             <button
               className={`btn ${activeTab === 'all' ? 'btn-success' : ''}`}
@@ -157,33 +157,40 @@ const HomeContent: React.FC = () => {
 
   return (
     <section className="content">
-      <div className="d-flex justify-content-between align-items-center w-100 mt-1 mb-3">
-        <div className="home-breadcrumb px-3">
-          <button
-            className={`btn ${activeTab === 'all' ? 'btn-success' : ''}`}
-            onClick={() => setActiveTab('all')}
-          >
-            All
-          </button>
-          <button
-            className={`btn breadcrumb-btn ${activeTab === 'favorites' ? 'btn-success' : ''}`}
-            onClick={() => setActiveTab('favorites')}
-          >
-            Favorites
-          </button>
+      <div className="d-flex justify-content-center align-items-center w-100 mt-1 mb-3 mx-4">
+        <div className="w-75 d-flex justify-content-between align-items-center">
+          <div className="home-breadcrumb px-3">
+            <button
+              className={`btn ${activeTab === 'all' ? 'btn-success' : ''}`}
+              onClick={() => setActiveTab('all')}
+            >
+              All
+            </button>
+            <button
+              className={`btn breadcrumb-btn ${activeTab === 'favorites' ? 'btn-success' : ''}`}
+              onClick={() => setActiveTab('favorites')}
+            >
+              Favorites
+            </button>
+          </div>
+          <div>
+            <CharactersFilters />
+          </div>
         </div>
-        <div>
-          <CharactersFilters />
-        </div>
-      </div>
-      <div className="d-flex justify-content-end align-content-center w-100 mt-1 mb-4 gap-2">
-        <h5 className="fw-bold">{count}</h5>
-        <span className="text-secondary">Personajes</span>
       </div>
       {activeTab === 'all' && (
-        <div className="content mt-0">
+        <div className="characters-wrapper mt-0">
+          <div className="d-flex justify-content-center align-content-center w-100 mx-4 mt-1 mb-4 gap-2">
+            <div className="w-75 d-flex justify-content-end align-items-center gap-1">
+              <h5 className="fw-bold my-0">{count}</h5>
+              <span className="text-secondary">Personajes</span>
+            </div>
+          </div>
           {characters.map((character) => (
-            <div className="mb-3" key={character.id}>
+            <div
+              className="mb-3 d-flex justify-content-center col-12 col-sm-12 col-md-12 col-lg-12 col-xl-5"
+              key={character.id}
+            >
               <CharacterCard
                 onClick={handleShowDetails}
                 character={character}
@@ -212,18 +219,26 @@ const HomeContent: React.FC = () => {
         </div>
       )}
       {activeTab === 'favorites' && (
-        <div className="w-100">
+        <div className="characters-wrapper mt-0">
           {favorites.length === 0 ? (
-            <div className="w-100 d-flex justify-content-center align-content-center">
-              Aún no tienes personajes favoritos. ¡Añade algunos desde la página
-              principal!
+            <div className="no-characters-placeholder-content">
+              <div className="w-100 h-100 d-flex justify-content-center align-content-center">
+                Aún no tienes personajes favoritos. ¡Añade algunos desde la
+                página principal!
+              </div>
             </div>
           ) : (
-            <div className="row">
+            <div className="characters-wrapper mb-2">
+              <div className="d-flex justify-content-center align-content-center w-100 mx-4 mt-1 mb-4 gap-2">
+                <div className="w-75 d-flex justify-content-end align-items-center gap-1">
+                  <h5 className="fw-bold my-0">{favorites.length}</h5>
+                  <span className="text-secondary">Personajes</span>
+                </div>
+              </div>
               {favorites.map((character) => (
                 <div
                   key={character.id}
-                  className="col-12 col-md-6 col-lg-4 mb-4"
+                  className="mb-3 d-flex justify-content-center col-12 col-sm-12 col-md-12 col-lg-12 col-xl-5"
                 >
                   <CharacterCard
                     character={character}
