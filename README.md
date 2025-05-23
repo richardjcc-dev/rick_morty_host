@@ -18,7 +18,7 @@ Para instalar las dependencias y ejecutar el microfrontend, se deben seguir los 
     Para que el Host funcione correctamente, el microfrontend remoto `rick_morty_remote` debe estar ejecutándose. Se debe leer el README del repositorio remoto para las instrucciones de ejecución.
 4.  **Ejecuta el proyecto Host en modo desarrollo:**
     ```bash
-    npm preview
+    npm run preview
     ```
     Esto ejecutará la aplicación Host, que intentará cargar y renderizar los componentes provistos por el microfrontend remoto.
 
