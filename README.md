@@ -1,54 +1,60 @@
-# React + TypeScript + Vite
+# MicroFrontend Host de Rick and Morty!
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este repositorio contiene la aplicación principal o "Host" para el proyecto de Rick and Morty, diseñado para orquestar y consumir microfrontends remotos. Actúa como el punto de entrada para los usuarios, gestiona el ruteo y centraliza la lógica para la obtención de datos de personajes y la gestión del estado global.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Instalación y Ejecución
 
-## Expanding the ESLint configuration
+Para instalar las dependencias y ejecutar el microfrontend, se deben seguir los siguientes pasos:
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+1.  **Clonar el repositorio:**
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+2.  **Instalar las dependencias:**
+    ```bash
+    npm install
+    ```
+3.  **Asegurarse que el microfrontend remoto está activo:**
+    Para que el Host funcione correctamente, el microfrontend remoto `rick_morty_remote` debe estar ejecutándose. Se debe leer el README del repositorio remoto para las instrucciones de ejecución.
+4.  **Ejecuta el proyecto Host en modo desarrollo:**
+    ```bash
+    npm preview
+    ```
+    Esto ejecutará la aplicación Host, que intentará cargar y renderizar los componentes provistos por el microfrontend remoto.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Arquitectura del Host
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+El `rick_morty_host` es la aplicación principal en esta arquitectura de microfrontends. Sus responsabilidades clave incluyen:
+
+* **Ruteo Principal**: Gestiona las rutas de la aplicación (ej. `/`, `/home`) utilizando `react-router-dom`, dirigiendo al usuario a las diferentes secciones.
+* **Orquestación de Componentes Remotos**: Cargar y renderizar los componentes expuestos por el microfrontend remoto (`rick_morty_remote`).
+* **Gestión de Estado Centralizada**: Utiliza una "**store**" (basada en Zustand) para manejar el estado global de la aplicación, incluyendo:
+    * La lógica de llamadas a la API para obtener los personajes.
+    * El estado de carga (`loading`), error (`error`) y los datos de los personajes (`characters`).
+    * Filtros de búsqueda y paginación.
+    * Gestión de favoritos.
+* **Interfaz de Usuario Principal**: Define la estructura global de la aplicación (Header, Content, Footer) y maneja las interacciones entre los componentes remotos y la lógica de negocio central.
+
+Los componentes principales que componen la `HomePage` son:
+* **`HomeHeader`**: Contiene elementos de UI como logos y el `CharacterSearcher` del remoto.
+* **`HomeContent`**: El corazón de la aplicación, donde se consumen los datos de la "store", se renderizan las `CharacterCard`s, se aplican los `CharactersFilters`, se gestiona la paginación y se abre el `CharacterDetails` en un modal.
+* **`HomeFooter`**: Contiene información informativa al final de la página.
+
+---
+
+## Dependencias Usadas
+
+Este proyecto utiliza las siguientes dependencias clave:
+
+* **React**: Biblioteca principal para la construcción de la interfaz de usuario.
+* **React Router DOM**: Para la gestión de ruteo en el cliente.
+* **TypeScript**: Para un desarrollo más robusto y tipado estático.
+* **Webpack (con Module Federation)**: Para empaquetar la aplicación y consumir los componentes de los microfrontends remotos.
+* **Zustand**: Para la gestión del estado global de la aplicación.
+* **React Bootstrap**: Para componentes de UI pre-estilizados.
+* **React Paginate**: Para la funcionalidad de paginación de los resultados.
+* **Axios**: Para realizar llamadas HTTP a la API.
+
+---
