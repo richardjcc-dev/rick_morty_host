@@ -39,14 +39,14 @@ El `rick_morty_host` es la aplicación principal en esta arquitectura de microfr
 
 Los componentes principales que componen la `HomePage` son:
 * **`HomeHeader`**: Contiene elementos de UI como logos y el `CharacterSearcher` del remoto.
-* **`HomeContent`**: El corazón de la aplicación, donde se consumen los datos de la "store", se renderizan las `CharacterCard`s, se aplican los `CharactersFilters`, se gestiona la paginación y se abre el `CharacterDetails` en un modal.
+* **`HomeContent`**: El corazón de la aplicación, donde se consumen los datos de la "store", se renderizan las `CharacterCard`, se aplican los `CharactersFilters`, se gestiona la paginación y se abre el `CharacterDetails` en un modal.
 * **`HomeFooter`**: Contiene información informativa al final de la página.
 
 ---
 
 ## Dependencias Usadas
 
-Este proyecto utiliza las siguientes dependencias clave:
+Este proyecto utiliza las siguientes dependencias:
 
 * **React**: Biblioteca principal para la construcción de la interfaz de usuario.
 * **React Router DOM**: Para la gestión de ruteo en el cliente.
