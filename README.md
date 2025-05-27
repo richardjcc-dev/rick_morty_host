@@ -14,9 +14,14 @@ Para instalar las dependencias y ejecutar el microfrontend, se deben seguir los 
     ```bash
     npm install
     ```
-3.  **Asegurarse que el microfrontend remoto está activo:**
+3.  **Ejecutar el build del proyecto:**
+    ```bash
+    npm run build
+    ```
+4.  **Asegurarse que el microfrontend remoto está activo:**
     Para que el Host funcione correctamente, el microfrontend remoto `rick_morty_remote` debe estar ejecutándose. Se debe leer el README del repositorio remoto para las instrucciones de ejecución.
-4.  **Ejecuta el proyecto Host en modo desarrollo:**
+    
+6.  **Ejecutar el proyecto Host en modo desarrollo:**
     ```bash
     npm run preview
     ```
